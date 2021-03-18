@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        var obj = {
+            name: "obj",
+            show: function () {
+                console.log('我的名字是：' + this.name);
+            },
+            hobbies: ['eat', 'read', 'sleep'],
+            undefined
+        }
+
+
+        function cloneFn(obj) {
+            let cloneObj = {}
+
+            // object array function
+            if (obj && typeof obj === 'object') {
+                for (let key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        if (obj[key] && Object.prototype.toString.call(obj[key]) === '[object Object]') {
+                            cloneObj[key] = cloneFn(obj[key])
+                        } else {
+                            cloneObj[key] = obj[key]
+                        }
+                    }
+                }
+            }
+
+            return cloneObj
+        }
+
+        var objDeep = cloneFn(obj)
+        console.log(objDeep)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        var obj = {
+            name: "obj",
+            show: function () {
+                console.log('我的名字是：' + this.name);
+            },
+            hobbies: ['eat', 'read', 'sleep'],
+            undefined
+        }
+        //序列化只是针对数据，（undefined,function不可实现）
+        let copyObj = JSON.parse(JSON.stringify(obj))
+        copyObj.hobbies[0] = 'null'
+        console.log(copyObj)
+        console.log(obj)
+        console.log('--------------')
+        function deepCopy(obj) {
+            // array object function 
+            let objClone = Array.isArray(obj) ? [] : {}
+            if (obj && typeof obj === 'object') {
+                for (let key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        if (obj[key] && Object.prototype.toString.call(obj[key]) === "[object Object]") {
+                            objClone[key] = deepCopy(obj[key])
+                        } else {
+                            objClone[key] = obj[key]
+                        }
+                    }
+                }
+            }
+
+            return objClone
+        }
+
+        var objDeep = deepCopy(obj)
+        objDeep.hobbies[0] = 'null'
+        console.log(obj)
+        console.log(objDeep)
+    </script>
+</body>
+
+</html>
