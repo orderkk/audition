@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="input">
+
+    <script>
+        var fn = function () {
+            console.log(' i do ')
+        }
+        // 普通写法
+        // document.getElementById('input').oninput = fn
+
+        document.getElementById('input').addEventListener('input', debounce(fn, 1000))
+        // 防抖优化
+        function debounce(fn, delay) {
+            let timer = null
+            return function () {
+                let context = this
+                let args = arguments
+
+                timer && clearTimeout(timer)
+                timer = setTimeout(() => {
+                    fn.apply(context, args)
+                }, delay);
+            }
+        }
+    </script>
+</body>
+
+</html>

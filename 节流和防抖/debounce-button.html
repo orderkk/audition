@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="button">点击</button>
+    <script>
+        var count = 0
+        function fn() {
+            count++
+            console.log(count)
+        }
+        var btn = document.getElementById('button');
+        // 普通
+        // btn.onclick = fn
+        btn.addEventListener('click', debounce(fn, 1000))
+        // 优化
+        function debounce(fn, delay) {
+            let timer = null
+            return function () {
+                let context = this
+                let args = arguments
+
+                timer && clearTimeout(timer)
+                timer = setTimeout(() => {
+                    fn.apply(context, args)
+                }, delay);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流</title>
+</head>
+
+<body>
+    <h1>节流</h1>
+    <h3>频繁的触发某个事件，只有在特定的时间内才会执行事件回调，即触发事件时间间隔大于指定的时间才会执行回调函数</h3>
+    <script>
+        function fn() {
+            console.log(Date.now())
+        }
+
+        // 普通写法
+        // window.addEventListener('resize', fn)
+
+        window.addEventListener('resize', throttle(fn, 1000))
+        // 时间戳
+        // function throttle(fn, delay) {
+        //     let startTime = Date.now() // 开始时间
+
+        //     return function () {
+        //         let context = this
+        //         let args = arguments;
+        //         let newTime = Date.now()
+
+        //         if (newTime - startTime > delay) {
+        //             fn.apply(context, arguments)
+        //             startTime = Date.now()
+        //         }
+        //     }
+        // }
+
+        // 定时器
+        function throttle(fn, delay) {
+            let timer = null;
+
+            return function () {
+                let context = this
+                let args = arguments
+
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        fn.apply(context, args)
+                        timer = null
+                    }, delay);
+                }
+            }
+        }
+
+        // 定时器+时间戳
+        // function throttle(fn, delay) {
+        //     let startTime = Date.now()
+
+        //     return function () {
+        //         let context = this
+        //         let args = arguments
+        //         let newTime = Date.now()
+
+        //         let remainTime = delay - (newTime - startTime);
+
+        //         if (remainTime <= 0) {
+        //             fn.apply(context, args)
+        //         } else {
+        //             setTimeout(() => {
+        //                 fn.apply(context, args)
+        //             }, remainTime);
+        //         }
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

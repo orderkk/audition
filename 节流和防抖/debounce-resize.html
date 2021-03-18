@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖</title>
+</head>
+
+<body>
+    <h1>防抖：</h1>
+    <h3>在短时间内多次出发同一个函数，只执行最后一次</h3>
+
+    <script>
+        // 普通场景
+        // window.onresize = function () {
+        //     console.log('I do')
+        // }
+
+        // 优化
+        function fn() {
+            console.log('I do')
+        }
+        window.addEventListener('resize', debounce(fn, 2000))
+        function debounce(fn, delay) {
+            let timer = null
+            return function () {
+                let context = this
+                let args = arguments
+
+                timer && clearTimeout(timer)
+                timer = setTimeout(() => {
+                    fn.apply(context, args)
+                }, delay);
+            }
+        }
+    </script>
+</body>
+
+</html>

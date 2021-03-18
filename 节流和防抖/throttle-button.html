@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="button">点击</button>
+    <script>
+        var count = 0
+        function fn() {
+            count++
+            console.log(count)
+        }
+        var btn = document.getElementById('button');
+
+        btn.addEventListener('click', throttle(fn, 1000))
+        // function throttle(fn, delay) {
+        //     var start = Date.now()
+        //     return function() {
+        //         let context = this
+        //         let args = arguments
+        //         let nowTime = Date.now()
+        //         if (nowTime - start > delay) {
+        //             fn.apply(context, args)
+        //             start = Date.now()
+        //         }
+        //     }
+        // }
+
+        function throttle(fn, delay) {
+            var timer = null;
+            return function () {
+                let context = this
+                let args = arguments
+
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        fn.apply(context, args)
+                        timer = null
+                    }, delay);
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>
