@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // function Hello() {}
+        // console.log(Hello.prototype)
+        // console.log(Hello.prototype.constructor)
+
+
+        // let h = new Hello()
+        // console.log(h.constructor)
+        // console.log(Object.getPrototypeOf(h) === Hello.prototype)
+
+        function Hehe(name) {
+            this.name = name
+        }
+        let h = new Hehe('jyk')
+        function newObj(name) {
+            var obj = {}
+            obj._proto_ = Hehe.prototype
+            obj.constructor = Hehe.prototype.constructor
+            var result = Hehe.call(obj, name)
+            return typeof result === 'object' && result != null ? result : obj
+        }
+
+        var hh = newObj('jyk')
+        console.log(hh)
+        console.log(h)
+    </script>
+</body>
+
+</html>

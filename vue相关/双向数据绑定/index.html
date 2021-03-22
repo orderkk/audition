@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <h1>question</h1>
+    <p>数据绑定给我们解决链什么问题</p>
+    <p>什么是双向数据绑定</p>
+    <p>双向数据绑定的原理是什么</p>
+    <p>如何实现</p>
+
+
+    <input type="text" onkeyup="change(event)">
+    <p id="test"></p> -->
+
+
+    <div id="app">
+        <input type="text" v-model="value">
+        <p v-text="value"></p>
+    </div>
+    <script>
+        // 原生js 单向数据绑定
+        const data = { value: 'i do' }
+        // document.getElementById('test').innerHTML = data.value
+
+        // 双向数据绑定
+        const change = (e) => {
+            data.value = e.target.value;
+            document.getElementById('test').innerHTML = data.value
+        }
+
+        // 数据和模版互相影响
+        // 监视器 （observer）观察数据，做到时刻清楚的观察到数据，通知视图更新
+        // 解析器 （compiler）观察ui 做到时刻清楚的观察到视图交互，并且更新数据
+
+        // 观察者模式 数据劫持 脏检查
+
+        // 模版解析
+        function Compile(el, data) {
+            if (el.attributes) {
+                [].forEach.call(el.attributes, attribute => {
+                    if (attribute.name.includes('v-')) {
+                        Update[attribute.name](el, data, attribute.value)
+                    }
+                })
+            }
+            // 递归解析所有的dom
+            [].forEach.call(el.childNodes, child => {
+                Compile(child, data)
+            })
+        }
+
+        const Update = {
+            'v-text'(el, data, key) {
+                el.innerText = data[key]
+
+
+                // 订阅 value 值的变化
+                Observer(messageQueue, key, value => {
+                    // console.log('value update: ' + value)
+                    el.innerText = value
+                })
+            },
+            'v-model'(el, data, key) {
+                el.value = data[key]
+
+                el.addEventListener('keyup', e => {
+                    data[key] = e.target.value
+                })
+
+                // 订阅 value 值的变化
+                Observer(messageQueue, key, value => {
+                    // console.log('value update: ' + value)
+                    el.value = value
+                })
+            }
+        }
+        // 发布者
+        function Subject() {
+            // 单个发布者的所有订阅者
+            this.observers = []
+            // 添加一个订阅者
+            this.attach = function (item) {
+                this.observers.push(item)
+            }
+            //通过所有的订阅者
+            this.notify = function (value) {
+                this.observers.forEach(item => {
+                    item(value)
+                })
+            }
+        }
+
+        /**
+         * 订阅者
+        */
+        function Observer(queue, key, callback) {
+            queue[key].attach(callback)
+        }
+
+        // 数据拦截器
+        function Watcher(data, queue) {
+            for (let key in data) {
+                let value = data[key]
+                Object.defineProperty(data, key, {
+                    enumerable: true, // 可枚举的
+                    configurable: true,  // 可配置的
+                    get: () => value,
+                    set: (newValue) => {
+                        value = newValue;
+
+                        // 通知此值的所有订阅者 数据发生改变
+                        queue[key].notify(value)
+                    }
+                })
+            }
+            return data
+        }
+
+        // 手动更新数据
+        function setDate(data, key, value) {
+            data[key] = value
+            // 通知此值的所有订阅者 数据发生链更新
+            messageQueue[key].notify(value)
+        }
+
+        // 消息队列
+        const messageQueue = {}
+
+        // 数据
+        // const myData = {
+        //     value: ''
+        // }
+        const myData = Watcher({ value: 'hello, world' }, messageQueue)
+
+        // 将每个数据属性添加可订阅的入口
+        for (let key in myData) {
+            messageQueue[key] = new Subject()
+        }
+
+
+
+        // setDate(myData, 'value', 'hello, world')
+        // setDate(myData, 'value', '123')
+
+        // myData.value = 'jyk'
+        // console.log(myData)
+        Compile(document.getElementById('app'), myData)
+    </script>
+</body>
+
+</html>

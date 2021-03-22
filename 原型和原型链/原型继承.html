@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(name, age) {
+            this.name = name
+            this.age = age
+        }
+
+        var parent = {
+            sayHello: function() {
+                console.log(this.name + ' : ' + this.age)
+            }
+        }
+        //1.直接替换原型对象
+        Person.prototype = parent
+        var p = new Person('zs', 13)
+        p.sayHello()
+
+        // 混入式原型链继承
+        function Student(name, age) {
+            this.name = name
+            this.age = age
+        }
+
+        var p2 = {
+            sayHello: function() {
+                console.log(this.name + ' : ' + this.age)
+            }
+        }
+
+        for (let key in p2) {
+            Student.prototype[key] = p2[key]
+        }
+
+        var p3 = new Student('ls' , 23)
+        p3.sayHello()
+    </script>
+</body>
+</html>
