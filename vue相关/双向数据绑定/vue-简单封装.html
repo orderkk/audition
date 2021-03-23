@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="value">
+        <p v-text="value"></p>
+    </div>
+
+
+    <script>
+        // data: {
+        //     value: 'hello, world'
+        // }
+
+
+        // 解析器
+        function Compiler(el, vm) {
+            if (el.attributes) {
+                [].forEach.call(el.attributes, attribute => {
+                    if (attribute.name.includes('v-')) {
+                        Update[attribute.name](el, vm.data, attribute.value, vm)
+                    }
+                })
+            }
+
+            [].forEach.call(el.childNodes, child => {
+                Compiler(child, vm)
+            })
+
+            return el
+        }
+
+        const Update = {
+            'v-text'(el, data, key, vm) {
+                el.innerText = data[key]
+
+                // 订阅
+                // Observer(messageQueue, key, value => {
+                //     el.innerText = value
+                // })
+
+                vm.observer.add(key, value => {
+                    el.innerText = value
+                })
+            },
+            'v-model'(el, data, key, vm) {
+                el.value = data[key]
+                el.addEventListener('keyup', e => {
+                    data[key] = e.target.value
+                })
+
+                // 订阅
+                // Observer(messageQueue, key, value => {
+                //     el.value = value
+                // })
+                vm.observer.add(key, value => {
+                    el.value = value
+                })
+            }
+        }
+
+        // 发布者
+        function Subject() {
+            // 所有订阅者
+            this.observers = []
+
+            // 订阅者的添加
+            this.attach = function (item) {
+                this.observers.push(item)
+            }
+
+            // 操作所有的订阅者
+            this.notify = function (value) {
+                this.observers.forEach(item => {
+                    item(value)
+                })
+            }
+        }
+
+        // 订阅者
+        // function Observer(queue, key, callback) {
+        //     queue[key].attach(callback)
+        // }
+
+        // function Observer(queue, key, callback) {
+        //     queue[key].attach(callback)
+        // }
+
+        function Observer(queue) {
+            // queue[key].attach(callback)
+            this.queue = queue
+            this.add = function (key, callback) {
+                this.queue[key].attach(callback)
+            }
+        }
+        // 消息队列
+        const messageQueue = {}
+
+        // data
+        // const myData = Watcher({ 'value': 'aaa' }, messageQueue)
+        // const myData = proxyWatcher({ 'value': 'aaa' }, messageQueue)
+        
+        // 给每个数据添加订阅入口
+        // for (let key in myData) {
+        //     messageQueue[key] = new Subject()
+        // }
+
+        // setData
+        function setData(data, key, value) {
+            data[key] = value
+            messageQueue[key].notify(value)
+        }
+
+        // setData(myData, 'value', 'hello,world')
+        // myData.value = 'hello, worldaa'
+        // console.log(myData)
+        // myData.value = 'hello, worldaa'
+        // console.log(myData)
+
+        // 数据拦截器
+        function Watcher(data, queue) {
+            for (let key in data) {
+                let value = data[key]
+                Object.defineProperty(data, key, {
+                    enumerable: true, // 可枚举的
+                    configurable: true,  // 可配置的
+                    get: () => value,
+                    set: newValue => {
+                        value = newValue
+                        queue[key].notify(value)
+                    }
+                })
+            }
+            return data
+        }
+
+        function proxyWatcher(data, queue) {
+            return new Proxy(data, {
+                get: (target, key) => target[key],
+                set: (target, key, value) => {
+                    target[key] = value
+
+                    queue[key].notify(value)
+                }
+            })
+        }
+
+
+        function Vue({ el, data }) {
+            // 消息队列
+            this.messageQueue = {}
+            this.observer = new Observer(this.messageQueue)
+            this.data = proxyWatcher(data, this.messageQueue)
+
+            for (let key in data) {
+                this.messageQueue[key] = new Subject()
+            }
+
+            this.el = Compiler(el, this)
+        }
+        const app = document.getElementById('app')
+        // Compiler(app, myData)
+
+        const myData = { 'value': 'hello, world!' }
+        const vm = new Vue({
+            el: app,
+            data: myData
+        })
+
+    </script>
+</body>
+
+</html>
