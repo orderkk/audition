@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj = {
+            a: 1
+        }
+        var a = 2;
+        function test() {
+            console.log(this.a)
+        }
+        // test()
+        // test.call(obj)
+        // test.apply(obj)
+
+        function testMore(b, c) {
+            console.log(this.a, b, c)
+        }
+        // testMore(12, 13)
+        // testMore.call(obj, 12, 13)
+        // testMore.apply(obj, [12, 13])
+
+        var t = testMore.bind(obj, 12, 13)
+        t()
+    </script>
+</body>
+
+</html>
