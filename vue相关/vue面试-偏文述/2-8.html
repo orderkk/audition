@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>单向数据流</h1>
+    <p>props 父传子</p>
+    <p>为了防止从子组件意外改变父级组件的状态</p>
+    <p>额外的，每次父级组件发生更新时，子组件中所有的 prop 都将会刷新为最新的值。这意味着你不应该在一个子组件内部改变 prop。如果你这样做了，Vue 会在浏览器的控制台中发出警告。</p>
+    <script>
+        // props: ['initialCounter'],
+        // data: function () {
+        //         return {
+        //             counter: this.initialCounter
+        //         }
+        //     }
+
+        // props: ['size'],
+        // computed: {
+        //     normalizedSize: function () {
+        //         return this.size.trim().toLowerCase()
+        //     }
+        // }
+    </script>
+
+    <h1>computed 和 watch 的区别和运用的场景？</h1>
+    <p>computed： 是计算属性，依赖其它属性值，并且 computed 的值有缓存，只有它依赖的属性值发生改变，下一次获取 computed 的值时才会重新计算 computed 的值；</p>
+    <p>watch： 更多的是「观察」的作用，类似于某些数据的监听回调 ，每当监听的数据变化时都会执行回调进行后续操作；</p>
+
+    <h1>直接给一个数组项赋值，Vue 能检测到变化吗？</h1>
+    <p>no!</p>
+    <script>
+        // Vue.set
+        Vue.set(vm.items, indexOfItem, newValue)
+        // vm.$set，Vue.set的一个别名
+        vm.$set(vm.items, indexOfItem, newValue)
+        // Array.prototype.splice
+        vm.items.splice(indexOfItem, 1, newValue)
+    </script>
+
+    <h1>谈谈你对 Vue 生命周期的理解？</h1>
+    <p>Vue 实例有一个完整的生命周期，也就是从开始创建、初始化数据、编译模版、挂载 Dom -> 渲染、更新 -> 渲染、卸载等一系列过程，我们称这是 Vue 的生命周期。</p>
+
+    <script>
+        // beforeCreated 
+        // created
+        // beforeMount
+        // mount
+        // beforeUpdate 
+        // update
+        // activated
+        // deactivated
+        // beforeDestory
+        // destoryed
+    </script>
+
+    <h1>Vue 的父组件和子组件生命周期钩子函数执行顺序？</h1>
+    <p>加载渲染过程</p>
+    <p>父 beforeCreate -> 父 created -> 父 beforeMount -> 子 beforeCreate -> 子 created -> 子 beforeMount -> 子 mounted -> 父
+        mounted</p>
+    <p>子组件更新过程</p>
+    <p>父 beforeUpdate -> 子 beforeUpdate -> 子 updated -> 父 updated</p>
+    <p>父组件更新过程</p>
+    <p>父 beforeUpdate -> 父 updated</p>
+    <p>销毁过程</p>
+    <p>父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed</p>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="input">
+    <button id="button">点击</button>
+    <script>
+        let count = 0
+        var fn = function () {
+            // console.log(' i do ')
+            count++
+            console.log(count)
+        }
+        // 普通写法
+        // document.getElementById('input').oninput = fn
+        // document.querySelector('input').oninput = fn
+        document.querySelector('input').addEventListener('input', debounce(fn, 1000), false)
+
+
+        document.querySelector('button').addEventListener('click', debounce(fn ,1000), false)
+        // function debounce(fn, delay) {
+        //     let timer = null
+        //     return function() {
+        //         let context = this
+        //         let args = arguments
+
+        //         timer && clearTimeout(timer)
+        //         timer = setTimeout(() => {
+        //             fn.apply(context, args)
+        //         },delay)
+        //     }
+        // }
+
+        function debounce(fn, delay) {
+            let timer = null
+            return function () {
+                let context = this
+                let args = arguments
+                // console.log(context, args)
+
+                timer && clearTimeout(timer)
+                timer = setTimeout(() => {
+                    fn.apply(context, args)
+                }, delay)
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * prototype 就是原型
+         * __proto__ 原型链就是由__proto__连起来的
+         *
+         * 从属关系
+         * prototype 是函数的一个属性 {}
+         * __proto__  是对象的一个属性 Object的一个属性 {}
+         *
+         * 对象的__proto__保存着该对象的构造函数的prototype
+         * */
+
+
+         function Test() {} 
+         console.log(Test.prototype) // 函数的一个属性
+         const test = new Test()
+         console.log(test.__proto__) // object的一个属性
+         console.log(Test.prototype === test.__proto__) // true
+         console.log(Test.prototype.__proto__ === Object.prototype)
+         console.log(Object.prototype.__proto__)
+    </script>
+</body>
+
+</html>

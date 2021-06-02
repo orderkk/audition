@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>在哪个生命周期内调用异步请求？</h1>
+    <p>created、beforeMount、mounted </p>
+    <p>但是本人推荐在 created 钩子函数中调用异步请求，因为在 created 钩子函数中调用异步请求有以下优点：</p>
+    <p>能更快获取到服务端数据，减少页面 loading 时间；</p>
+    <p>ssr 不支持 beforeMount 、mounted 钩子函数，所以放在 created 中有助于一致性；</p>
+
+    <h1>在什么阶段才能访问操作DOM？</h1>
+    <p>在钩子函数 mounted 被调用前，Vue 已经将编译好的模板挂载到页面上，所以在 mounted 中可以访问操作 DOM。</p>
+
+    <h1>父组件可以监听到子组件的生命周期吗？</h1>
+    <p>注： 代码测试！</p>
+
+    <h1>谈谈你对 keep-alive 的了解？</h1>
+    <p>keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状态，避免重新渲染 ，其有以下特性：</p>
+    <p>一般结合路由和动态组件一起使用，用于缓存组件；</p>
+    <p>提供 include 和 exclude 属性，两者都支持字符串或正则表达式， include 表示只有名称匹配的组件会被缓存，exclude 表示任何名称匹配的组件都不会被缓存 ，其中 exclude 的优先级比 include 高；</p>
+    <p>对应两个钩子函数 activated 和 deactivated ，当组件被激活时，触发钩子函数 activated，当组件被移除时，触发钩子函数 deactivated。</p>
+
+    <h1>组件中 data 为什么是一个函数？</h1>
+    <p>因为组件是用来复用的</p>
+    <p>为了子组件之间相互不影响</p>
+
+    <h1>v-model 的原理？</h1>
+    <p>语法糖</p>
+    <input type="text" v-model="value">
+    <input type="text" :value="value" @input="value = $event.target.value">
+</body>
+</html>

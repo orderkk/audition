@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>SPA的理解， 优点 缺点</h1>
+    <p>single-page application</p>
+
+    <h3>优点</h3>
+    <p>1.对服务器的压力小</p>
+    <p>2.前后端分离，架构清晰</p>
+    <p>3.用户体验好，避免链不必要的跳转和重复渲染</p>
+    <h3>缺点</h3>
+    <p>1.初次加载耗时较长</p>
+    <p>2.前端路由，浏览器路由不能使用</p>
+    <p>3.seo难度加大</p>
+
+    <h1>v-if 和 v-show</h1>
+    <p>v-if是真正的条件渲染，惰性，</p>
+    <p>v-show display</p>
+    <p>场景：v-if 不频繁改变条件</p>
+    <p>v-show 频繁</p>
+
+    <h1>class style</h1>
+    <div :class={'active': isActive, 'text-danger' : hasError}>
+        // class
+        // 对象语法
+    </div>
+    <div :class=[isActive ? active : '' , errorClass]>
+        // class
+        // 数组语法
+    </div>
+    <div :style={color: activeColor, fontSize: fontSize + 'px'}>
+        // style
+        // 对象语法
+    </div>
+    <div :style=[activeColorClass, fontSizeClass]>
+        // style
+        // 数组语法
+    </div>
+    
+</body>
+
+</html>

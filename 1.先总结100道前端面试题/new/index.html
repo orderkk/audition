@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function f(a) {
+            console.log(a)
+        }
+        // var a = new F()
+        
+        function myNew(fn, ...args) {
+            console.log(fn, args)
+            // 创建一个对象
+            let obj = {}
+            // 使空对象的__proto__指向fn的prototype
+            obj.__proto__ = fn.prototype
+
+            let result = fn.apply(obj, args)
+            return result instanceof Object ? resullt : obj
+        }
+        myNew(f, 1)
+    </script>
+</body>
+</html>

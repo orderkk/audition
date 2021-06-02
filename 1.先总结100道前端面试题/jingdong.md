@@ -1,9 +1,4 @@
-### 地址：https://blog.csdn.net/qq_33277654/article/details/112758362?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162227533516780264063679%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=162227533516780264063679&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-112758362.first_rank_v2_pc_rank_v29&utm_term=%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98&spm=1018.2226.3001.4187
-
-## 标题 为三本的我就是凭借这些前端面试题拿到百度京东offer的，前端面试题2021及答案
-
-js 
-数据类型
+ ### 数据类型
 # 1.面试官：JavaScript中什么是基本数据类型什么是引用数据类型？以及各个数据类型是如何存储的？
   答：基本数据类型有:Number String Boolean Undefined Null Symbol bigInt
      引用数据类型：Object (Array, Date, Function, RegExp)
@@ -13,7 +8,7 @@ js
      // 栈 简单数据段 
      // 堆 指针
 
-类型转换
+### 类型转换
 # 2.面试官：在JS中为什么0.2+0.1 ！=0.3?
   答：因为在JS中，浮点数是使用64位固定长度来表示的，其中的1位表示符号位，11位用来表示指数位，剩下的52位尾数位，由于只有52位表示尾数位。
 
@@ -161,4 +156,72 @@ js
         Array.prototype.slice.call()
 
 # 10.面试官：字面量创建对象和new创建对象有什么区别，new内部都实现了什么，手写一个new
+    答： 字面量：
+            字面量创建对象更简单，方便阅读
+            不需要作用域解析，速度更快
+        new:
+            创建一个新的对象
+            新对象的__proto__ 指向原函数的prototype
+# 11.面试官：字面量new出来的对象和 Object.create(null)创建出来的对象有什么区别
+    答：字面量和new创建出来的对象  {} instanceof Object --- true | new Object() instanceof Object --- true
+        他们的__proto__ 始终会指向 Object.prototype
+
+        Object.create(null)创建出来的对象原型为null，作为原型链的顶端，自然也没有继承Object的方法和属性
+# 12.面试官：什么是作用域，什么是作用域链？
+    答：规定变量和函数的可使用范围称作作用域
+        每个函数都有一个作用域链，查找变量或者函数时，需要从局部作用域到全局作用域依次查找，这些作用域的集合称作作用域链。
+# 13.面试官：什么是执行栈，什么是执行上下文？
+    答：全局执行上下文
+            创建一个全局的window对象，并规定this指向window，执行js的时候就压入栈底，关闭浏览器的时候才弹出
+        函数执行上下文
+            每次函数调用时，都会新创建一个函数执行上下文
+            执行上下文分为创建阶段和执行阶段
+            创建阶段：函数环境会创建变量对象：arguments对象（并赋值）、函数声明（并赋值）、变量声明（不赋值），函数表达式声明（不赋值）；会确定this指向；会确定作用域
+            执行阶段：变量赋值、函数表达式赋值，使变量对象编程活跃对象
+        eval执行上下文
+# 14.面试官：什么是闭包？闭包的作用？闭包的应用？
+    答：
+# 15.面试官：防抖
+    答：设定一个时间让某个高频事件最后一次执行完以后再经过的设定时间结束后 执行一次
+    function debounce(fn, delay) {
+        let timer = null
+        return function () {
+            let context = this
+            let args = arguments
+            timer && clearTimeout(timer)
+            timer = setTimeout(() => {
+                fn.apply(context, args)
+            }, delay)
+        }
+    }
+# 16.面试官：节流
+    答：时间戳 设定一个时间戳，当执行时间-开始时间大于设定时间戳的时候，执行fn，
+    function throttle(fn, delay) {
+        var start = Date.now()
+        return function() {
+            let context = this
+            let args = arguments
+            let newTime = Date.now()
+
+            if (newTime - start >= delay) {
+                fn.apply(context, args)
+                start = Date.now()
+            }
+        }
+    }
+    定时器 感觉意思也差不多
+    function throttle(fn, delay) {
+        var timer = null
+        return function () {
+            let context = this
+            let args = arguments
+            if (!timer) {
+                timer = setTimeout(() => {
+                    fn.apply(context, args)
+                    timer = null
+                }, delay)
+            }
+        }
+    }
+# 17.面试官：什么是原型？什么是原型链？如何理解
     答：
