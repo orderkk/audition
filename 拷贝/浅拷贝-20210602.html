@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj1 = {
+            a: {
+                a1: { a2: 1 },
+                a10: { a11: 123, a111: { a1111: 123123 } }
+            },
+            b: 123,
+            c: "123",
+            d: undefined,
+            e: [1, 2, 3, { a: 123 }]
+        }
+
+        function shallowClone1(o) {
+            let obj = {}
+            for (let k in o) {
+                obj[k] = o[k]
+            }
+            return obj
+        }
+        function shallowObj3(o) {
+            return Object.assign({}, o)
+        }
+        // var obj2 = { ...obj1 }
+        var obj2 = shallowObj3(obj1)
+        // console.log(obj2)
+        // var o2 = shallowClone1(obj1)
+        // obj2.b = 'woshishui'
+        obj1.a.a1 = 996
+        obj2.b = true
+        console.log(obj2)
+        console.log(obj1)
+    </script>
+</body>
+
+</html>

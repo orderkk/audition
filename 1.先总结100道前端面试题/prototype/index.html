@@ -22,13 +22,19 @@
          * */
 
 
-         function Test() {} 
-         console.log(Test.prototype) // 函数的一个属性
+         function Test() {
+             this.a = 1
+         } 
+        //  console.log(Test.prototype) // 函数的一个属性
+        
+        //  console.log(test.__proto__) // object的一个属性
+        //  console.log(Test.prototype === test.__proto__) // true
+        //  console.log(Test.prototype.__proto__ === Object.prototype) // true
+        //  console.log(Object.prototype.__proto__) // null
+
+
          const test = new Test()
-         console.log(test.__proto__) // object的一个属性
-         console.log(Test.prototype === test.__proto__) // true
-         console.log(Test.prototype.__proto__ === Object.prototype)
-         console.log(Object.prototype.__proto__)
+         c
     </script>
 </body>
 

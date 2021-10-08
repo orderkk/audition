@@ -225,3 +225,74 @@
     }
 # 17.面试官：什么是原型？什么是原型链？如何理解
     答：
+# 18.面试官：什么是内存泄漏
+    答： 内存泄露是指不再用的内存没有被及时释放出来，导致该段内存无法被使用就是内存泄漏
+# 19.面试官：为什么会导致的内存泄漏
+    答：内存泄漏指我们无法在通过js访问某个对象，而垃圾回收机制却认为该对象还在被引用，因此垃圾回收机制不会释放该对象，导致该块内存永远无法释放，积少成多，系统会越来越卡以至于崩溃
+# 20.面试官：垃圾回收机制都有哪些策略？
+    答：
+# 21 面试官：浅拷贝
+    答：
+    var obj1 = {
+        a: {
+            a1: { a2: 1 },
+            a10: { a11: 123, a111: { a1111: 123123 } }
+        },
+        b: 123,
+        c: "123",
+        d: undefined,
+        e: [1, 2, 3, {a: 123}]
+    }
+
+    function shallowClone1(o) {
+        let obj = {}
+        for (let k in o) {
+            obj[k] = o[k]
+        }
+        return obj
+    }
+
+    var obj2 = { ...obj1 }
+
+    function shallowObj3(o) {
+        return Object.assign({}, o)
+    }
+# 22.面试官：深拷贝
+    答：
+    // 简易版
+    function simpleDeepClone(o) {
+        let obj = {}
+        for (let key in o) {
+            if (typeof o[key] === 'object') {
+                obj[key] = simpleDeepClone(o[key])
+            } else {
+                obj[key] = o[key]
+            }
+        }
+        return obj
+    }
+    // 另一个简易版
+    function deepClone(o) {
+        // 判读是否是对象
+        if (Object.prototype.toString.call(o) === '[object Object]') {
+            let obj = {}
+            for (let i in o) {
+                if (o.hasOwnProperty(i)) {
+                    if (typeof o[i] === 'object') {
+                        obj[i] = deepClone(o[i])
+                    } else {
+                        obj[i] = o[i]
+                    }
+                }
+            }
+            return obj
+        } else {
+            return o
+        }
+    }
+# 23.面试官：为什么JS是单线程的？
+    答：
+# 24.面试官：Generator是怎么样使用的以及各个阶段的变化如何？
+    答：
+# 25.面试官：js同异步问题
+    答：

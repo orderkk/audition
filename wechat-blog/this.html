@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        var a = 1;
+        var obj = {
+            a: 2
+        }
+        function fn() {
+            console.log(this.a)
+        }
+        fn()
+        fn.call(obj)
+        fn.apply(obj)
+
+        var fnBind = fn.bind(obj)
+        fnBind()
+        console.log('------------------')
+        function fnArgs(b, c) {
+            console.log(this.a, b, c)
+        }
+        fnArgs()
+        fnArgs.call(obj, 3, 4)
+        fnArgs.apply(obj, [3, 4])
+        var fnArgsBind = fnArgs.bind(obj)
+        fnArgsBind(3, 4)
+    </script>
+</body>
+
+</html>
