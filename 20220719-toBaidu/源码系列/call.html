@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var obj = { age: 26 }
+    var age = 27
+
+    function log(name) {
+      console.log(`${name} is ${this.age} years old`)
+    }
+
+    log('lyq')
+    log.call(obj, '梁榆晴')
+
+    Function.prototype.myCall = function (conetxt, ...args) {
+
+      let ctx = conetxt || window;
+      let func = Symbol()
+      ctx[func] = this;
+
+      let result = args.length > 0 ? ctx[func](...args) : ctx[func]()
+
+      delete ctx[func]
+
+      return result
+    }
+
+    log.myCall(obj, 'sr')
+  </script>
+</body>
+
+</html>
