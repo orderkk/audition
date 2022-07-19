@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>throttle</title>
+</head>
+<style>
+    #box {
+        width: 100%;
+        height: 300px;
+        background-color: #eee;
+        color: red;
+        font-size: 30px;
+        text-align: center;
+        font-weight: 700;
+        line-height: 300px;
+    }
+</style>
+
+<body>
+
+    <div id="box"></div>
+    <script>
+        var count = 1;
+        var oBody = document.getElementById('box');
+
+        // oBody.addEventListener('mousemove', getUserAction, false)
+        oBody.addEventListener('mousemove', throttle(getUserAction, 1000), false)
+
+        function getUserAction(e) {
+            console.log(e)
+            oBody.innerHTML = count++;
+        }
+
+        // function throttle(func, delay) {
+        //     let startTime = Date.now()
+
+        //     return function () {
+        //         let contxt = this
+        //         let args = arguments
+
+        //         let curTime = Date.now()
+        //         if (curTime - startTime >= delay) {
+        //             func.apply(contxt, args)
+        //             startTime = curTime
+        //         }
+
+        //     }
+        // }
+        function throttle(func, delay) {
+            let timer = null
+
+            return function () {
+                let contxt = this
+                let args = arguments
+
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        func.apply(contxt, args);
+                        clearTimeout(timer)
+                        timer = null
+                    }, delay)
+                } 
+            }
+        }
+    </script>
+</body>
+
+</html>

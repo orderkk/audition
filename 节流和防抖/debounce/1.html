@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>debounce</title>
+</head>
+<style>
+    #box {
+        width: 100%;
+        height: 300px;
+        background-color: #eee;
+        color: red;
+        font-size: 30px;
+        text-align: center;
+        font-weight: 700;
+        line-height: 300px;
+    }
+</style>
+
+<body>
+    <div id="box"></div>
+    <script>
+        var count = 1;
+        var oBody = document.getElementById('box');
+
+        function getUserAction(e) {
+            console.log(e)
+            oBody.innerHTML = count++;
+        }
+
+        // oBody.addEventListener('mousemove', getUserAction, false)
+        // oBody.addEventListener('mousemove', firstDebounce(getUserAction, 1000), false)
+        // oBody.addEventListener('mousemove', secondDebounce(getUserAction, 1000), false)
+        oBody.addEventListener('mousemove', thirdDebounce(getUserAction, 1000), false)
+
+        function firstDebounce(func, delay) {
+            var timer = null;
+            return function () {
+                timer && clearTimeout(timer)
+                timer = setTimeout(func, delay)
+            }
+        }
+
+        function secondDebounce(func, delay) {
+            var timer = null;
+            return function () {
+                let context = this;
+
+                timer && clearTimeout(timer)
+                timer = setTimeout(() => {
+                    func.apply(context)
+                }, delay)
+            }
+        }
+
+        function thirdDebounce(func, delay) {
+            let timer = null
+            return function () {
+                let context = this
+                let args = arguments
+
+                timer && clearTimeout(timer)
+                timer = setTimeout(() => {
+                    func.apply(context, args)
+                }, delay)
+            }
+        }
+    </script>
+</body>
+
+</html>

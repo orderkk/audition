@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function test() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve('test 1000');
+                }, 5000);
+            })
+        }
+        function fn() {
+            return 'fn';
+        }
+
+        async function next() {
+            let res0 = await fn();
+            let res1 = await test()
+            // res2 = await fn();
+            console.log(res0);
+            console.log(res1);
+            // console.log(res2);
+        }
+        next(); // 1s 后才打印出结果 为什么呢 就是因为 res1在等待promise的结果 阻塞了后面代码。
+
+    </script>
+</body>
+
+</html>

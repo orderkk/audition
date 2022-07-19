@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function test() {
+            return 'test';
+        }
+        console.log(test); // [AsyncFunction: test] async函数是[`AsyncFunction`]构造函数的实例
+        console.log(test()); // Promise { 'test' }
+
+        // async返回的是一个promise对象
+        test().then(res => {
+            console.log(res); // test
+        })
+        
+        // 如果async函数没有返回值 async函数返回一个undefined的promise对象
+        async function fn() {
+            console.log('没有返回');
+        }
+        console.log(fn()); // Promise { undefined }
+
+        // 可以看到async函数返回值和Promise.resolve()一样，将返回值包装成promise对象，如果没有返回值就返回undefined的promise对象
+
+    </script>
+</body>
+
+</html>
