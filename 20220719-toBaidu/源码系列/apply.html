@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var obj = { a: 1 }
+    var a = 2
+
+    function log(name) {
+      console.log(`${name} is ${this.a} age`)
+    }
+
+    log('lyq') // lyq is 2 age
+    log.apply(obj, ['lyq']) // lyq is 1 age
+
+    Function.prototype.myApply = function(context, args = []) {
+      let ctx = context || window;
+      let func = Symbol()
+
+      ctx[func] = this
+      let result = args.length > 0 ? ctx[func](...args) : ctx[func]()
+      delete ctx[func]
+
+      return result
+    }
+
+    log.myApply(obj, ['lyq'])
+  </script>
+</body>
+
+</html>
