@@ -22,7 +22,21 @@
     let m = log.bind(obj, 'lyq')
     m() // lyq is 1 age
 
-    
+    Function.prototype.myBind = function(context, ...args) {
+
+      let fn = this;
+      args = args || [];       
+      return function newFn(...args2) {
+
+        if (this instanceof newFn) {
+          return fn(...args, ...args2)
+        }
+        return fn.apply(context, [...args, ...args2])
+      }
+    }
+
+    let res = log.myBind(obj, 'lyq')
+    res()
   </script>
 </body>
 
