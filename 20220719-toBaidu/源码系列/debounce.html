@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #box {
+    width: 100%;
+    height: 300px;
+    background-color: #eee;
+    color: red;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 300px;
+  }
+</style>
+
+
+<body>
+  <div id="box"></div>
+  <script>
+    var count = 1;
+    var oBody = document.getElementById('box');
+    function getUserAction() {
+      oBody.innerHTML = count++;
+    }
+    // 鼠标的移动事件会高频出发某个事件（该事件可能是一个很耗性能的操作）
+    // oBody.addEventListener('mousemove', getUserAction, false)
+    oBody.addEventListener('mousemove', debounce(getUserAction, 1000), false)
+
+
+    function debounce(fn, delay) {
+      let timer = null;
+
+      return function () {
+        let ctx = this;
+        let args = arguments;
+        timer && clearTimeout(timer)
+        timer = setTimeout(() => {
+          fn.apply(ctx, args)
+        }, delay)
+      }
+    }
+  </script>
+</body>
+
+</html>
