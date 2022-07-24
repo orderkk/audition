@@ -5,12 +5,30 @@ import traverse from "@babel/traverse";
 import path from 'path'
 import ejs from 'ejs'
 import { transformFromAst } from '@babel/core'
-
 let id = 1
+import { jsonLoader } from './jsonLoader.js'
+
+const webpackConfig = {
+  module: {
+    rules: [
+      {
+        test: /\.json$/,
+        use: jsonLoader
+      }
+    ]
+  }
+}
 function createAsset(filePath) {
   // 1.获取文件的内容
   let source = fs.readFileSync(filePath, {
     encoding: "utf-8"
+  })
+
+  const loaders = webpackConfig.module.rules;
+  loaders.forEach(({ test, use }) => {
+    if (test.test(filePath)) {
+      source = use(source)
+    }
   })
 
   // 2.获取依赖的关系
@@ -64,7 +82,6 @@ function build(graph) {
       mapping: assets.mapping
     }
   })
-  console.log(data);
   const code = ejs.render(template, { data });
   fs.writeFileSync('./dist/bundle.js', code)
 }
