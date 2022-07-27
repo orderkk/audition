@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    class People {
+      constructor(name = "liang", age = "27") {
+        this.name = name;
+        this.age = age
+      }
+      eat() {
+        console.log(`${this.name} ${this.age} eat food`);
+      }
+    }
+    // es6 继承
+    class Woman extends People {
+
+      constructor(name = 'wang', age = " 30") {
+        super(name, age)
+      }
+      eat() {
+        super.eat()
+      }
+    }
+
+    // let wm = new Woman()
+    // wm.eat()
+
+
+    // 寄生式组合继承
+    function Animal(obj) {
+      this.name = obj.name;
+      this.age = obj.age;
+    }
+    Animal.prototype.add = function (value) {
+      console.log(value)
+    }
+
+    var dog = new Animal({ name: 'doggo', age: 6 })
+    dog.add('hahaha')
+    console.log(Animal.prototype === dog.__proto__);
+    console.log(Animal.prototype.constructor === Animal);
+
+    function Cat(obj) {
+      Animal.call(this, obj)
+      this.sex = obj.sex
+    }
+    Cat.prototype = Object.create(Animal.prototype);
+    Cat.prototype.constructor = Cat;
+
+    var cat = new Cat({ name: 'miaomiao', age: 4, sex: 'boy' })
+    console.log(cat);
+    cat.add('miaomiaomiao')
+  </script>
+</body>
+
+</html>
