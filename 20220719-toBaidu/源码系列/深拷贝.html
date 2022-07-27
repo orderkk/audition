@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>深拷贝</title>
+</head>
+
+<body>
+  <script>
+    // var obj = {
+    //   a: undefined,
+    //   b: {
+    //     c: function () {
+    //       console.log(1)
+    //     },
+    //     d: null,
+    //     e: new Date(),
+    //     f: new RegExp('\\w+'),
+    //     g: NaN
+    //   },
+    //   c: null
+    // }
+    var obj = {
+      a: 1
+    }
+    obj.obj = obj
+    // let obj1 = JSON.parse(JSON.stringify(obj));
+    // console.log(obj1);
+
+    let obj2 = deepclone(obj);
+    console.log(obj2);
+    function deepclone(target, hash = new WeakMap()) {
+
+      // 开始处理null regexp date
+      if (target == null) return target; // null
+      if (target instanceof Date ) return new Date(target) // Date
+      if (target instanceof RegExp ) return new RegExp(target) // Regexp
+
+      // 如果是原始类型，则无需继续拷贝，直接返回
+      if (typeof target !== 'object') return target; // 原始类型
+
+      // 为什么要这么写 不用在拷贝的时候去判断数组类型，原对象是数组，就创建一个新的克隆数组
+      // 原对象是对象，就创建一个新的克隆对象
+
+      if (hash.get(target)) return hash.get(target)
+      // let cloneTarget = {} // 定义一个克隆对象
+      let cloneTarget = new target.constructor() // 创建一个新的克隆数组或者克隆对象
+      hash.set(target, cloneTarget)
+      
+      // for (const key in target) { 
+      //   // 开始递归
+      //   cloneTarget[key] = deepclone(target[key])
+      // }
+
+      Reflect.ownKeys(target).forEach((key) => {
+        cloneTarget[key] = deepclone(target[key], hash)
+      })
+      return cloneTarget
+    }
+  </script>
+</body>
+
+</html>
