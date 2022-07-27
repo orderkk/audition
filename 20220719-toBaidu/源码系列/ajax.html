@@ -17,27 +17,27 @@
 
     function ajax(url, methods, body, headers) {
       return new Promise((resolve, reject) => {
-        let req = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         
-        req.open(methods, url);
+        xhr.open(methods, url);
         if (headers) {
           for (let key in headers) {
-            req.setRequestHeader(key, headers[key])
+            xhr.setRequestHeader(key, headers[key])
           }
         }
         
-        req.onreadystatechange = function () {
+        xhr.onreadystatechange = function () {
           
-          if (req.readyState === 4) {
-            if (req.status == 200) {
-              resolve(req.responseText)
+          if (xhr.readyState === 4) {
+            if (xhr.status == 200) {
+              resolve(xhr.responseText)
             } else {
-              reject(req)
+              reject(xhr)
             }
           }
         }
 
-        req.send(body)
+        xhr.send(body)
       })
     }
   </script>
