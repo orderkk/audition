@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var arr = [2, 5, 3, 0, -1, 90]
+    let res = quick(arr)
+    console.log(res);
+
+    function quick(arr) {
+      if (arr.length <= 0) return arr
+      let left = []
+      let right = []
+      let mid = arr[0]
+
+      for (let i = 1; i < arr.length; i ++) {
+        if (arr[i] > mid) {
+          right.push(arr[i])
+        } else {
+          left.push(arr[i])
+        }
+      }
+
+      return quick(left).concat(mid, quick(right))
+    }
+  </script>
+</body>
+
+</html>

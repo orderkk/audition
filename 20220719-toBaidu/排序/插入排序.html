@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var arr = [2, 5, 3, 0, -1, 90]
+    let res = insert(arr)
+    console.log(res);
+
+    function insert(arr) {
+      for (let i = 0; i < arr.length; i ++) {
+        for (let j = i; j > 0; j --) {
+          if (arr[j] < arr[j - 1]) {
+            [arr[j], arr[j - 1]] = [arr[j - 1], arr[j]]
+          }
+        }
+      }
+      return arr
+    }
+  </script>
+</body>
+
+</html>
