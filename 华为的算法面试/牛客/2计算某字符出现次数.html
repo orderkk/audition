@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var str = 'ABCabc'
+    var res = test(str, 'A');
+    console.log(res);
+
+    function test(str, num) {
+      let map = new Map()
+      str = str.toLowerCase() 
+      num = num.toLowerCase()
+
+      console.log(str);
+      for (let key of str) {
+        if (map.has(key)) {
+          map.set(key, map.get(key) + 1)
+        } else {
+          map.set(key, 1)
+        }
+      }
+      return map.get(num) || 0
+    }
+  </script>
+</body>
+
+</html>

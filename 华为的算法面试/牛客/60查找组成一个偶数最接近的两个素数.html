@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var num = 54;
+    let res = []
+    console.log(test(num))
+    function test(num) {
+      let arr = []
+      let i = 2;
+      let temp = num;
+      while (i <= temp) {
+        if (isPrime(i) && isPrime(num - i)) {
+          arr.push([i, num - i])
+          // temp -= i
+        }
+        i ++
+        
+      }
+      return arr
+      // return choiceMinArr(arr)
+    }
+    
+    function choiceMinArr(arr) {
+      if (arr.length === 1) {
+        return arr[0]
+      } 
+      let minArr = arr[0];
+      arr.forEach(item => {
+        if (Math.abs(item[0] - item[1]) < Math.abs(minArr[0] - minArr[1])) {
+          minArr = item
+        }
+      })
+      return minArr
+    }
+    function isPrime(num) {
+      for (let i = 2; i * i <= num; i++) {
+        if (num % i === 0) {
+          return false
+        }
+      }
+      return true
+    }
+  </script>
+</body>
+
+</html>

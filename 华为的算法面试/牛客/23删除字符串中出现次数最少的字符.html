@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var str = 'aabcddd';
+
+    console.log(test(str))
+    function test(str) {
+      let map = new Map()
+      for (let key of str) {
+        if (map.has(key)) {
+          map.set(key, map.get(key) + 1)
+        } else {
+          map.set(key, 1)
+        }
+      }
+      let arr = Array.from(map)
+      arr.sort((a, b) => {
+        return a[1] - b[1]
+      })
+
+      let s = arr[0][1]
+      let temp = []
+      for (let i = 0; i < arr.length; i ++) {
+        if (arr[i][1] === s) {
+          temp.push(arr[i][0])
+        }
+      }
+      
+      let newArr = str.split('');
+      let result = newArr.filter(item => !temp.includes(item))
+
+      return result.join('')
+    }
+  </script>
+</body>
+
+</html>

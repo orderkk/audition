@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    let key = 9876673;
+    console.log(test(key))
+    function test(key) {
+      let str = key.toString().split('').reverse().join('');
+      let arr = [];
+      let map = new Map()
+      for (let key of str) {
+        if (!map.has(key)) {
+          map.set(key, 1);
+          arr.push(key)
+        }
+      }
+      return arr.join('')
+    }
+  </script>
+</body>
+
+</html>

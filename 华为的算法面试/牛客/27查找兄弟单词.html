@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let length = 3;
+    let dictArr = ['abc', 'bca', 'cab']
+    let target = 'abc'
+    let k = 1
+
+    let res = solution(length, dictArr, target, k)
+    console.log(res)
+    function solution(length, dictArr, target, k) {
+      let newArr = []
+      let map = new Map();
+      for (let key of target) {
+        if (map.has(key)) {
+          map.set(key, map.get(key) + 1)
+        } else {
+          map.set(key, 1)
+        }
+      }
+
+      for (let i = 0; i < dictArr.length; i++) {
+        if (dictArr[i] !== target && isVaild(dictArr[i], map)) {
+          newArr.push(dictArr[i])
+        }
+      }
+      newArr.sort()
+      console.log(newArr)
+
+      if (newArr[k - 1]) {
+        return newArr[k - 1]
+      }
+
+      function isVaild(str, map) {
+
+        for (let key of str) {
+          if (!map.has(key) && map.get(key) === 0) {
+            return false
+          } else {
+            map.set(key, map.get(key) - 1)
+          }
+        }
+        return true
+      }
+
+    }
+
+
+  </script>
+</body>
+
+</html>

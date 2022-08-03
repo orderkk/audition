@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var str = '10.0.3.193'
+    // console.log(toNum(str))
+    function toNum(line) {
+      let arr = line.split('.');
+      let res = arr.map(item => Number(item).toString(2).padStart(8, 0))
+
+      return parseInt(res.join(''), 2) 
+    }
+
+    let num = '167969729';
+    console.log(toIp(num));
+    function toIp(num) {
+      let str = Number(num).toString(2).padStart(32, 0);
+      let arr = [];
+      let result = ''
+      for (let i = 0; i < 32; i = i + 8) {
+        arr.push(str.slice(i, i + 8))
+      }
+      return arr.map(item => parseInt(item, 2)).join('.')
+    }
+  </script>
+</body>
+
+</html>

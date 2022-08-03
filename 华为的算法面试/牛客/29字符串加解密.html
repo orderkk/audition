@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // let str = 'abcdefghijklmnopqrstuvwxyz'
+
+    // for (let i of str) {
+    //   console.log(i.toLocaleUpperCase().charCodeAt())
+    // }
+
+    // let str = '2OA92AptLq5G1lW8564qC4nKMjv8C'
+    let str = 'B5WWIj56vu72GzRja7j5'
+    let res = solution(str)
+    console.log(res);
+    function solution(str) {
+      let reg1 = /[A-Z]/;
+      let reg2 = /[a-z]/;
+      let reg3 = /[0-9]/;
+
+      let res = "";
+      for (let key of str) {
+        if (reg1.test(key)) {
+          if (key === "a") {
+            res += "Z";
+          } else {
+            res += String.fromCharCode(key.charCodeAt() - 1).toLocaleLowerCase();
+          }
+        } else if (reg2.test(key)) {
+          // 小写变大写 a->b->B
+          if (key === "A") {
+            res += "z";
+          } else {
+            res += String.fromCharCode(key.charCodeAt() - 1).toLocaleUpperCase();
+          }
+        } else if (reg3.test(key)) {
+          if (key == 0) {
+            res += "0";
+          } else {
+            res += key * 1 - 1;
+          }
+        }
+      }
+      return res;
+    }
+
+  </script>
+</body>
+
+</html>

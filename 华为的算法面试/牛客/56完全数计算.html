@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var num = 1000;
+    let res = test(num)
+    console.log(res);
+
+    function test(num) {
+      let count = 0;
+      for (let i = 1; i < num; i++) {
+        if (isVaild(i)) {
+          count++
+        }
+      }
+      return count
+    }
+    function isVaild(num) {
+      let arr = []
+      for (let i = 1; i < num; i++) {
+        if (num % i === 0) {
+          arr.push(i)
+        }
+      }
+
+      function sum(arr) {
+        return arr.reduce((c, v) => {
+          return c + v
+        }, 0)
+      }
+
+      if (sum(arr) === num) {
+        return true
+      }
+      return false
+    }
+  </script>
+</body>
+
+</html>

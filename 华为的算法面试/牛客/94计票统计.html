@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    let num1 = 4 // 候选人人数
+    let arr1 = ['A', 'B', 'C', 'D']
+    let num2 = 8; // 投票人人数
+    let arr2 = ['A', 'D', 'E', 'CF', 'A', 'GG', 'A', 'B']
+
+    let res = test(num1, num2, arr1, arr2);
+    res.map(item => console.log(item[0] + ':' + item[1]))
+    function test(num1, num2, arr1, arr2) {
+      let map = new Map();
+      for (let key of arr1) {
+        map.set(key, 0)
+      }
+      map.set('Invalid', 0);
+      for (let key of arr2) {
+        if (arr1.indexOf(key) > -1) {
+          map.set(key, map.get(key) + 1)
+        } else {
+          map.set('Invalid', map.get('Invalid') + 1)
+        }
+      }
+      return Array.from(map)
+    }
+  </script>
+</body>
+
+</html>

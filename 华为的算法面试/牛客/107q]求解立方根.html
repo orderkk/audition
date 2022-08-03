@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let num = 27;
+    console.log(test(num))
+    function test(num) {
+      let left = 1,
+        right = num;
+
+      while (left <= right) {
+        let mid = Math.floor((right - left) / 2) + left;
+        console.log(mid);
+        if (cbrt(mid) === num) {
+          return mid;
+        } else if (cbrt(mid) > num) {
+          // right = mid 
+        } else if (cbrt(mid) < num) {
+          // left = mid 
+        }
+      }
+      return left - 1
+    }
+
+    function cbrt(num) {
+      return (num * num * num).toFixed(1)
+    }
+  </script>
+</body>
+
+</html>

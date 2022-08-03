@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let num = 4;
+    let arr = [
+      [0, 1],
+      [0, 2],
+      [1, 2],
+      [3, 4]
+    ]
+    let res = test(num, arr)
+    console.log(res)
+    function test(num, arr) {
+      let map = new Map();
+
+      for (let i = 0; i < num; i++) {
+        if (map.has(arr[i][0])) {
+          map.set(arr[i][0], map.get(arr[i][0]) + arr[i][1]);
+        } else {
+          map.set(arr[i][0], arr[i][1]);
+        }
+      }
+      let arr1 = Array.from(map);
+      return arr1.sort((a, b) => a[0] - b[0]);
+    }
+  </script>
+</body>
+
+</html>

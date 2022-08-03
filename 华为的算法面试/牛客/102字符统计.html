@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let str = 'aa11333ddccdc';
+    console.log(test(str));
+    function test(str) {
+      let arr = str.split("").sort();
+      let result = ''
+      let map = new Map()
+      for (let key of arr) {
+
+        if (map.has(key)) {
+          map.set(key, map.get(key) + 1)
+        } else {
+          map.set(key, 1)
+        }
+      }
+      let newArr = Array.from(map);
+      newArr = newArr.sort((a, b) => {
+
+        if (a[1] === b[1]) {
+          return a[0].charCodeAt() - b[0].charCodeAt();
+        } else {
+          return b[1] - a[1];
+        }
+      })
+
+      newArr.forEach(item => {
+        result += item[0]
+      })
+
+      return result
+    }
+
+  </script>
+</body>
+
+</html>

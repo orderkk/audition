@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    function Animal(name) {
+      this.name = name
+    }
+    Animal.prototype.eat = function () {
+      console.log(this.name);
+    }
+
+    var n = new Animal('cat')
+    n.eat()
+
+    function mynew(func, ...args) {
+      /**
+       * 
+       * func: Animal
+       * args: 'cat'
+      */
+     console.log(typeof func);
+      let obj = Object.create(func.prototype);
+      func.call(obj, ...args)
+      return obj
+    }
+
+    let m = mynew(Animal, 'cat')
+    m.eat()
+  </script>
+</body>
+
+</html>

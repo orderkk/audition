@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let arr = ['A10', 'S20', 'W10', 'D30', 'X', 'A1A', 'B10A11', '', 'A10']
+    let res = test(arr);
+    console.log(res)
+    function test(arr) {
+      let reg = /^(S|A|W|D){1}[0-9]{1,2}$/;
+      // var reg2 = /^(A|D|W|S){1}[0-9]{1,2}$/;
+      // 有效数组
+      let m = arr.filter(item => reg.test(item));
+      let x = 0, y = 0;
+      console.log(m)
+      for (let i = 0; i < m.length; i++) {
+        let dir = m[i].charAt(0);
+        let step = Number(arr[i].slice(1));
+
+        switch (dir) {
+          case 'A':
+            x = x - step;
+            break;
+          case 'D':
+            x = x + step;
+            break;
+          case 'S':
+            y = y - step;
+            break;
+          case 'W':
+            y = y + step;
+            break;
+          default:
+            break;
+        }
+      }
+
+      return [x, y].join(',')
+    }
+
+  </script>
+</body>
+
+</html>
