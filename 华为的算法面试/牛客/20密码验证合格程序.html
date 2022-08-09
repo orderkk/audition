@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let str = '021$bc9000';
+    let a = solution(str)
+    console.log(a);
+    function solution(str) {
+      let length = str.length;
+      let validStr = length > 8;
+      let validRepeat = repeat(str);
+      let validTypes = types(str);
+      console.log(validRepeat, validTypes);
+      if (validStr && validRepeat && validTypes) {
+        return "OK";
+      } else {
+        return "NG";
+      }
+    }
+
+    function types(str) {
+      let num = 0;
+      if (/[a-z]/.test(str)) {
+        num++;
+      }
+      if (/[A-Z]/.test(str)) {
+        num++;
+      }
+      if (/[0-9]/.test(str)) {
+        num++;
+      }
+      if (/[^0-9a-zA-Z]/.test(str)) {
+        num++;
+      }
+      return num >= 3;
+    }
+
+    function repeat(str) {
+      let arr = [];
+      for (let i = 0; i < str.length - 2; i++) {
+        for (let j = i + 2; j < str.length; j++) {
+          let temp = str.substr(i, j - i + 1);
+          if (arr.includes(temp)) {
+            return false;
+          } else {
+            arr.push(temp);
+          }
+        }
+      }
+      return true;
+    }
+
+    // repeat(str)
+    // function repeat(str) {
+    //   let arr = []
+    //   for (let i = 0; i < str.length - 2; i++) {
+    //     for (let j = i + 2; j < str.length; j++) {
+    //       let temp = str.substr(i, j - i + 1)
+    //       if (arr.includes(temp)) {
+    //         return false
+    //       } else {
+    //         arr.push(temp)
+    //       }
+    //     }
+    //   }
+    //   return true
+    // }
+  </script>
+</body>
+
+</html>

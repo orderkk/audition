@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let length = 3
+    let sortIndex = 1
+    let arr = [
+      ['fang', '90'],
+      ['yang', '50'],
+      ['ning', '70']
+
+    ]
+    solution(arr, sortIndex)
+    function solution(arr, sortIndex) {
+      let scores = []
+
+      arr.forEach((item, index) => {
+        const [name, score] = [item[0], item[1]];
+        scores.push({
+          name: name,
+          score: score,
+          index: index
+        });
+      })
+
+      scores.sort((a, b) => {
+        if (sortIndex == 0) {
+          return b.score - a.score
+        } else {
+          return a.score - b.score
+        }
+      })
+
+      scores.forEach(item => {
+        console.log(item.name + ' ' + item.score)
+      })
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    let arr = [1, 5, -5, 1]
+    let length = 4
+    console.log(solution(arr, length))
+    function solution(arr, length) {
+      let arr3 = []
+      let arr5 = []
+      let arrOther = []
+
+      for (let i = 0; i < length; i++) {
+        if (arr[i] % 5 == 0) {
+          arr5.push(arr[i])
+        } else if (arr[i] % 3 == 0) {
+          arr3.push(arr[i])
+        } else {
+          arrOther.push(arr[i])
+        }
+      }
+
+      let sum3 = sum(arr3)
+      let sum5 = sum(arr5)
+
+      return helper(sum3, sum5, arrOther, 0)
+    }
+
+    function sum(arr) {
+      return arr.reduce((c, v) => {
+        return c + v
+      }, 0)
+    }
+
+    function helper(sum3, sum5, arrOther, index) {
+      if (arrOther.length === 0 && sum3 !== sum5) {
+        return false
+      } else if (arrOther.length === 0 && sum3 === sum5) {
+        return true
+      } else if (arrOther.length === index && sum3 !== sum5) {
+        return false
+      } else if (arrOther.length === index && sum3 === sum5) {
+        return true
+      } else if (index < arrOther.length) {
+        return helper(sum3 + arrOther[index], sum5, arrOther, index + 1) ||
+          helper(sum3, sum5 + arrOther[index], arrOther, index + 1)
+      } else {
+        return false
+      }
+    }
+
+  </script>
+</body>
+
+</html>

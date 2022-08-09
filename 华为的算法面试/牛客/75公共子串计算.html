@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let str1 = 'asdfas';
+    let str2 = 'werasdfaswer';
+
+    let res = solution(str1, str2);
+    console.log(solution(str1, str2))
+    function solution(str1, str2) {
+      let s1 = str1.length;
+      let s2 = str2.length;
+
+      let short = s1 > s2 ? str2 : str1;
+      let long = s1 > s2 ? str1 : str2;
+
+      let begin = 0,
+        maxLen = 1;
+      let arr = [];
+      for (let i = 0; i < short.length; i++) {
+        for (let j = i; j < short.length; j++) {
+          let sliceStr = short.substr(i, j - i + 1);
+          if (long.includes(sliceStr)) {
+            arr.push(sliceStr)
+          }
+        }
+      }
+
+      arr.sort((a, b) => b.length - a.length);
+      return arr.length > 0 ? arr[0].length : 0
+    }
+
+
+  </script>
+</body>
+
+</html>

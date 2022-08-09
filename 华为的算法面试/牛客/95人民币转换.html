@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    let num = '123456.20'
+    solution(num)
+    function solution(num) {
+
+      let obj = {
+        1: '壹',
+        2: '贰',
+        3: '叁',
+        4: '肆',
+        5: '伍',
+        6: '陆',
+        7: '柒',
+        8: '捌',
+        9: '玖',
+        0: '零',
+      }
+      let res = ''
+
+      let [str1, str2] = num.split('.')
+      getZhengshu(str1)
+      //小数部分
+      let xiaoshuArr = []
+      if (str2 != '00') {
+        let jiao = str2[0]
+        let fen = str2[1]
+
+        if (fen != 0) {
+          xiaoshuArr.push(obj[fen])
+          xiaoshuArr.push('分')
+        }
+        if (jiao != 0) {
+          xiaoshuArr.unshift('角')
+          xiaoshuArr.unshift(obj[jiao])
+        }
+
+      } else {
+        xiaoshuArr.push('整')
+      }
+      //整数部分
+      function getZhengshu(num) {
+
+        let len = Math.ceil(num.length / 4);
+
+        console.log(len);
+        let zhengshuArr = []
+
+
+
+        console.log(zhengshuArr);
+      }
+
+    }
+
+    // for (let i = 1; i <= len; i++) {
+    //   const startEnd = i == 1 ? [-i * 4] : [-i * 4, (-i + 1) * 4]
+    //   arrInt.push(integer.slice(...startEnd));
+    // }
+    // for (let i = len - 1; i >= 0; i--) {
+    //   let w = readFour(arrInt[i]);
+    //   if (w) {
+    //     val += w + unitMax[i];
+    //   }
+    // }
+  </script>
+</body>
+
+</html>

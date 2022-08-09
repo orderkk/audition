@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var arr = [7, 2, 1, 10]
+    let num = 24;
+
+    solution(arr)
+    function solution(arr, num) {
+
+      let flag = false;
+      helper(arr, 0)
+      function helper(arr, res) {
+        // 递归结束条件
+        if (res > 24) {
+          return
+        }
+        if (res === 24) {
+          flag = true;
+          return
+        }
+
+        if (res < 24) {
+
+          for (let i = 0; i < arr.length; i++) {
+            //拷贝下数组，原数组需要多次使用，不能修改
+            let newArr = arr.slice();
+            //下一次是数组是去掉当前数字的数组
+            newArr.splice(i, 1);
+            if (res === 0) {
+              // 初始化
+              helper(newArr, arr[i])
+            } else {
+              helper(newArr, res + arr[i])
+              // helper(newArr, res - arr[i])
+              // helper(newArr, res * arr[i])
+              // helper(newArr, res / arr[i])
+            }
+          }
+        }
+      }
+
+    }
+  </script>
+</body>
+
+</html>

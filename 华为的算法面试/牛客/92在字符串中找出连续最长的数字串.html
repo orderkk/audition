@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var str = 'a8a72a6a5yy98y65ee1r2'
+
+    solution(str)
+    function solution(str) {
+
+      let length = str.length;
+      let reg = /[0-9]/
+      let reg1 = /^[0-9]*$/
+      let arr = []
+      let temp = []
+      for (let i = 0; i < length; i++) {
+        if (reg.test(str[i])) {
+          for (let j = i; j < length; j++) {
+            let sliceStr = str.substr(i, j - i + 1)
+            if (reg1.test(sliceStr)) {
+              arr.push(sliceStr)
+            }
+          }
+        }
+      }
+      arr.sort((a,b) => b.length - a.length);
+
+      let maxLen = arr[0].length;
+      let maxLenArr = []
+      for (let i = 0; i < arr.length; i ++) {
+        if (arr[i].length === maxLen) {
+          maxLenArr.push(arr[i])
+        }
+      }
+      console.log(maxLenArr.join('')+','+maxLen)
+    }
+  </script>
+</body>
+
+</html>

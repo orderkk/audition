@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let arr1 = [4, 4, 4, 4]
+    let arr2 = ['joker', 'JOKER']
+    solution(arr1, arr2)
+    function solution(arr1, arr2) {
+      let obj = {
+        A: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+        6: 6,
+        7: 7,
+        8: 8,
+        9: 9,
+        10: 10,
+        J: 11,
+        Q: 12,
+        K: 13,
+        joker: 'joker',
+        JOKER: 'JOKER'
+      };
+      
+
+      let l = arr1.length;
+      let r = arr2.length;
+
+      if (arr1 == 'joker JOKER' || arr2 == 'joker JOKER') {
+        console.log('joker JOKER')
+      }
+    }
+  </script>
+</body>
+
+</html>

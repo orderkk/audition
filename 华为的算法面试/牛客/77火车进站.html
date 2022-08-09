@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    let num = 3;
+    let arr = [1, 2, 3]
+
+    solution(arr, num)
+    function solution(arr, num) {
+      // arr 未驶进站台的火车
+      let length = arr.length
+      let res = [] // 输出数组
+      let inTrainArr = [] // 站中的火车
+      let outTrainArr = [] // 驶出站台的火车
+
+      helper(arr, num, inTrainArr, outTrainArr)
+
+      res.sort()
+      res.forEach(item => {
+        console.log(item.join(' '));
+      })
+      function helper(stand, n, inTrainArr, outTrainArr) {
+        // 递归结束的条件是什么
+        // 未驶进站台的火车 和 站台的火车都为空  即 驶出站台的火车数量 === n
+        if (outTrainArr.length === n) {
+          res.push([...outTrainArr])
+        }
+
+        // 当火车还从没开始进来的时候
+        if (stand.length === n) {
+          inTrainArr.push(stand.shift())
+          helper(stand, n, inTrainArr, outTrainArr)
+          return
+        }
+
+        // 当站外还有火车的时候
+        if (stand.length > 0) {
+          var cur = stand.shift();
+          inTrainArr.push(cur)
+          helper(stand, n, inTrainArr, outTrainArr)
+          inTrainArr.pop()
+          stand.unshift(cur)
+        }
+
+        // 当站内还有火车的时候
+        if (inTrainArr.length > 0) {
+          var cur = inTrainArr.pop()
+          outTrainArr.push(cur)
+          helper(stand, n, inTrainArr, outTrainArr)
+          outTrainArr.pop()
+          inTrainArr.push(cur)
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

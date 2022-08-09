@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var arr = ['1G', '2G', '1024M']
+    solution(arr)
+    function solution(arr) {
+      let temp = []
+      arr.forEach((item, index) => {
+        temp.push(test(item, index))
+      })
+      
+      temp.sort((a, b) => {
+        if (a.m === b.m) {
+          return a.index - b.index
+        } else {
+          return a.m - b.m
+        }
+      })
+
+      console.log(temp);
+    }
+
+    function test(str, index) {
+
+      let res = ''
+      let map = new Map()
+      map.set('T', [])
+      map.set('G', [])
+      map.set('M', [])
+      for (let i = 0; i < str.length; i++) {
+
+        if (str[i] == 'T') {
+          let arr = map.get('T');
+          arr.push(res)
+          map.set('T', arr)
+          res = ''
+        }
+
+        else if (str[i] == 'G') {
+          let arr = map.get('G');
+          arr.push(res)
+          map.set('G', arr)
+          res = ''
+        }
+
+        else if (str[i] == 'M') {
+          let arr = map.get('M');
+          arr.push(res)
+          map.set('M', arr)
+          res = ''
+        } else {
+          res = res + str[i]
+        }
+      }
+
+      let newArr = Array.from(map);
+      let result = 0
+      newArr.forEach(item => {
+        if (item[0] == 'T') {
+          result += sum(item[1]) * 1024 * 1024
+        }
+        if (item[0] == "G") {
+          result += sum(item[1]) * 1024
+        }
+        if (item[0] == 'M') {
+          result += sum(item[1]) * 1
+        }
+      })
+
+      let obj = {
+        m: result,
+        index: index,
+        value: str
+      }
+      return obj
+    }
+
+    function sum(arr) {
+      return arr.reduce((c, v) => {
+        return parseInt(c) + parseInt(v)
+      }, 0)
+    }
+  </script>
+</body>
+
+</html>

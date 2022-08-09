@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    let [str1, str2] = ['123', '15']
+
+    solution(str1, str2)
+    function solution(str1, str2) {
+      let arr = (str1 + str2).split('')
+
+      let arr1 = [] // 奇数数组
+      let arr2 = [] // 偶数数组
+      for (let i = 0; i < arr.length; i++) {
+        if (i % 2 === 0) {
+          arr2.push(arr[i])
+
+        } else {
+          arr1.push(arr[i])
+        }
+      }
+
+      arr1.sort()
+      arr2.sort()
+
+      let tempArr = []
+      for (let i = 0; i < arr2.length; i++) {
+        tempArr.push(arr2[i])
+        arr1[i] && tempArr.push(arr1[i])
+      }
+
+      let res = ''
+      for (let key of tempArr) {
+        if (/[0-9]/.test(key) || /[a-f]/.test(key) || /[A-F]/.test(key)) {
+          res += needTransform(key)
+        } else {
+          res += key
+        }
+      }
+
+      console.log(res)
+    }
+
+    function needTransform(str) {
+      let binary = parseInt(str, 16).toString(2)
+      binary = binary.padStart(4, '0');
+      let m = binary.split('').reverse().join('')
+
+      let hex = parseInt(m, 2).toString(16).toUpperCase()
+
+      return hex
+      // let temp = [...parseInt(i, 16).toString(2).padStart(4, '0')].reverse().join('');
+      // last += parseInt(temp, 2).toString('16').toUpperCase();
+    }
+  </script>
+</body>
+
+</html>

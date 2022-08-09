@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * 
+     * 8
+        1 2 3 4 5 6 7 8
+        4
+    */
+    class Node {
+      constructor(v, next) {
+        this.v = v;
+        this.next = next;
+      }
+    }
+
+    const reverseLinkedList = head => {
+      let prev = null;
+      let cur = head;
+      while (cur) {
+        const next = cur.next;
+        cur.next = prev;
+        prev = cur;
+        cur = next;
+      }
+      return prev;
+    }
+
+    const createLinkedList = (nodeValues) => {
+      // 构造链表
+      const head = new Node(nodeValues[0], null)
+      let cur = head;
+      for (let i = 1; i < nodeValues.length; i++) {
+        const v = nodeValues[i];
+        const node = new Node(v, null);
+        cur.next = node;
+        cur = node;
+      }
+      return head;
+    }
+
+    while (len = ~~readline()) {
+      const nodeValues = readline().split(' ');
+      let head = createLinkedList(nodeValues);
+      // 翻转链表
+      head = reverseLinkedList(head);
+      let k = ~~readline();
+      let result = head;
+      if (k === 0) {
+        console.log(0)
+      } else {
+        while (k) {
+          result = result.next;
+          k--
+        }
+        console.log(result.v);
+      }
+    }
+
+  </script>
+</body>
+
+</html>

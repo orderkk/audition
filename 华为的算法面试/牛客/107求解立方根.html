@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let str = 19.9;
+    let num = 0;
+    function test(str) {
+      str = Math.abs(str);
+      if (num * num * num < str) {
+        num += 0.01;
+        test(str)
+      } else {
+        return num
+      }
+    }
+
+    // let str = readline();
+    // let num = 0;
+    // function cal(str) {
+    //   str = Math.abs(str);
+    //   if (num * num * num < str) {
+    //     num += 0.01;
+    //     cal(str);
+    //   } else {
+    //     return num;
+    //   }
+    // }
+    // cal(str);
+    // console.log(str >= 0 ? num.toFixed(1) : -num.toFixed(1));
+
+    test(str);
+    console.log(str >= 0 ? num.toFixed(1) : -num.toFixed(1));
+  </script>
+</body>
+
+</html>

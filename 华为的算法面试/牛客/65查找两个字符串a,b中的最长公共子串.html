@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    let str1 = 'nvlrzqcjltmrejybjeshffenvkeqtbsnlocoyaokdpuxutrsmcmoearsgttgyyucgzgcnurfbubgvbwpyslaeykqhaaveqxijc',
+      str2 = 'wkigrnngxehuiwxrextitnmjykimyhcbxildpnmrfgcnevjyvwzwuzrwvlomnlogbptornsybimbtnyhlmfecscmojrxekqmj';
+
+    console.log(solution(str1, str2))
+    function solution(str1, str2) {
+      let begin = 0, // 开始位置
+        maxLen = 1, // 截取长度
+        s1 = str1.length;
+      let arr = []
+      for (let i = 0; i < s1 - 1; i++) {
+        for (let j = i + 1; j < s1; j++) {
+          let str = str1.substr(i, j - i + 1);
+          if (isVaild(str2, str)) {
+            arr.push(str)
+          }
+        }
+      }
+
+      arr.sort((a, b) => b.length - a.length)
+
+      let allMaxArr = []
+      let maxLength = arr[0].length;
+
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].length === maxLength) {
+          allMaxArr.push(arr[i])
+        }
+      }
+      if (allMaxArr.length === 1) {
+        return allMaxArr[0]
+      } else {
+        let short = str1.length > str2.length ? str2 : str1;
+        
+        let minArr = new Array(allMaxArr.length).fill(0);
+
+        allMaxArr.forEach((item, index) => {
+          minArr[index] = short.indexOf(item)
+        })
+        let minIndex = Math.min(...minArr);
+        let res ;
+        for (let i = 0; i < minArr.length; i ++) {
+          if (minArr[i] === minIndex) {
+            res = allMaxArr[i]
+          }
+        }
+        return res
+      }
+    }
+
+    function isVaild(longStr, shortStr) {
+      return longStr.includes(shortStr)
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>ß
+
+<body>
+  <script>
+
+    var arr = ['1G', '2G', '1024M']
+
+    function solution(arr) {
+      let temp = []
+      arr.forEach(item => {
+
+      })
+    }
+
+    function test(arr) {
+
+      let res = []
+      for (let i = 0; i < arr.length; i++) {
+
+        if (arr[i].indexOf('T') > -1 &&
+          arr[i].indexOf('G') == -1 &&
+          arr[i].indexOf('M') == -1) {
+          let tValue = arr[i].split('T').map(Number);
+          let sumValue = sum(tValue)
+          res.push({
+            m: sumValue * 1024 * 1024,
+            index: i,
+            value: arr[i]
+          })
+        }
+
+        if (arr[i].indexOf('T') == -1 &&
+          arr[i].indexOf('G') > -1 &&
+          arr[i].indexOf('M') == -1) {
+          let gValue = arr[i].split('G').map(Number);
+          let sumValue = sum(gValue)
+          res.push({
+            m: sumValue * 1024,
+            index: i,
+            value: arr[i]
+          })
+        }
+
+        if (arr[i].indexOf('T') == -1 &&
+          arr[i].indexOf('G') == -1 &&
+          arr[i].indexOf('M') > -1) {
+          let mValue = arr[i].split('M').map(Number);
+          let sumValue = sum(mValue)
+          res.push({
+            m: sumValue * 1,
+            index: i,
+            value: arr[i]
+          })
+        }
+
+
+        if (arr[i].indexOf('T') > -1 &&
+          arr[i].indexOf('G') > -1 &&
+          arr[i].indexOf('M') == -1) {
+            let tValue = arr[i].split('T');
+            let gValue = arr[i].split('G');
+
+            console.log(tValue);
+            console.log(gValue);
+        }
+      }
+
+    }
+
+
+    function sum(arr) {
+      return arr.reduce((c, v) => {
+        return c + v
+      }, 0)
+    }
+
+
+  </script>
+</body>
+
+</html>
