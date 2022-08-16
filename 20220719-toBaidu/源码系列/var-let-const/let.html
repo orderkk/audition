@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    function f() {
+
+      // for (var i = 0; i < 5; i ++) {
+      //   setTimeout(() => {
+      //     console.log(i);
+      //   })
+      // }
+
+      // for (var i = 0; i < 5; i ++) {
+      //   (function(i) {
+      //     setTimeout(() => {
+      //       console.log(i);
+      //     })
+      //   })(i)
+      // }
+
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          console.log(i);
+        })
+      }
+    }
+
+    // f()
+
+    /**
+     * 
+     * 我们可以通过花括号{}以及let和const关键词声明限制于块级作用域中的变量了。
+     * if块、while块、function块甚至单独的{}都是良好的块级作用域声明区块。
+     * 还有一点，
+     * 相对于var,在全局作用域中使用let和const声明的变量并不会添加到全局上下文对象global中。
+     * 综合看来，块级作用域的特性使我们的变量的声明和使用更加的简洁和安全。
+     * 
+    */
+
+    // if (true) {
+    //   let a = 1
+    // }
+
+    // console.log(a);
+
+    // let b = 2
+    // console.log(window.b);
+
+    // let a = 1
+    // { let a = 2 }
+
+    /**
+     * 
+     * let 和 const 关键字声明变量也具有执行中
+    */
+
+    function f() {
+      console.log(value);
+    }
+
+    let value = 1;
+    f()
+    
+  </script>
+</body>
+
+</html>
